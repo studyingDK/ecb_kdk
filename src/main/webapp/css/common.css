@@ -1,0 +1,97 @@
+* {
+    padding: 0;
+    margin: 0;
+    font-size: 1.5rem;
+    font-family: gowunBatang;
+  }
+
+.place_chk {
+    border: 1.2px dashed black;
+  }
+
+.wrap {
+  min-width: 1340px;
+  /* 너비가 최대 화면 너비를 넘지 않도록 설정 */
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+@media (min-width: 1340px) {
+.wrap {
+    overflow-x: hidden;
+    /* 최소 너비 이상에서 스크롤바를 숨깁니다 */
+}
+}
+
+@media (min-width: 768px) {
+  .inner {
+      width: 500px;
+      margin: 0 auto;
+  }
+}
+
+@font-face {
+  font-family: gowunBatang;
+  src: url("/fonts/GowunBatang-Bold.ttf");
+}
+
+
+.radius-button {
+  display: inline-block;
+  overflow: hidden;
+  /* 내용이 태그 바깥으로 벗어나지 않도록 설정 */
+  position: relative;
+  /* 포지션을 설정하여 이미지를 정확한 위치에 배치 */
+  border: none;
+  width: 4rem;
+  height: 4rem;
+  border-radius: 10px;
+  cursor: pointer;
+  margin: 0 1.6rem;
+
+}
+
+.oauth-box {
+  position: absolute;
+  width: 100%;
+  text-align: center;
+  bottom: 0rem;
+}
+
+img {
+  position: relative;
+  width: 100%;
+  /* 이미지의 너비를 부모 요소인 .container의 너비와 같게 설정 */
+  height: 100%;
+  /* 높이를 자동으로 조절하여 비율을 유지 */
+}
+
+.text_verticalLine {
+  color: #c4c7ca;
+  font-size: 20px;
+  padding: 0 8px;
+}
+
+.header_align_line {
+  background-color: rgb(142, 188, 241);
+  border-top: 3px solid rgb(142, 188, 241);
+  z-index: 1px;
+}
+
+.home_move_button {
+  background: none;
+  color: rgb(142, 188, 241);
+  border: none;
+  cursor: pointer;
+  text-shadow: 2px 2px 2px #28292b;
+
+}
+
+.flex_vertical_center {
+  display: flex;
+  /* 수직 정렬*/
+  align-items: center;
+  /* 수평 정렬*/
+  justify-content: center;
+}

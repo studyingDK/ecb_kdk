@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+	<typeAliases>
+		<typeAlias type="com.project.kdkhelloworld.login.dto.UserInfoDTO" alias="UserInfoDTO"/>
+		<typeAlias type="com.project.kdkhelloworld.login.dto.UserDetailDTO" alias="UserDetailDTO"/>
+		<typeAlias type="com.project.kdkhelloworld.login.dto.TotalUserInfoDTO" alias="TotalUserInfoDTO"/>
+		<typeAlias type="java.util.Map" alias="Map"/>
+		<typeAlias type="java.lang.Integer" alias="Integer"/>
+		<typeAlias type="java.util.List" alias="List"/>
+	</typeAliases>
+</configuration>

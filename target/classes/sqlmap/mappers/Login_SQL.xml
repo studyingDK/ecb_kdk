@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.project.kdkhelloworld.login.mapper.LoginMapper">
+
+	<insert id="insertUserInfo" parameterType="TotalUserInfoDTO">
+		INSERT INTO pcb_userinfo
+		(user_id, login_id, password, user_name, user_photo, 
+		 reg_id, reg_dtm, lst_up_id, lst_up_dtm)
+		VALUES(#{userId}, #{loginId}, #{password}, #{userName}, #{userPhoto},
+		 'SYSTEM', date_format(now(),'%Y-%m-%d %H:%i:%S'), 'SYSTEM', date_format(now(),'%Y-%m-%d %H:%i:%S'));
+	</insert>
+	
+	<insert id="insertUserDetail" parameterType="TotalUserInfoDTO">
+		INSERT INTO pcb_userinfo_detail
+		(user_id, user_gender, user_birth_cd, user_phone, user_zip_cd, user_address, user_address_detail, user_secondary_email, reg_id, reg_dtm, lst_up_id, lst_up_dtm)
+		VALUES(#{userId}, #{userGender}, #{userBirthCd}, #{userPhone}, 
+		#{userZipCd}, #{userAddress}, #{userAddressDetail}, #{userSecondaryEmail}, 
+		'SYSTEM', date_format(now(),'%Y-%m-%d %H:%i:%S'), 'SYSTEM', date_format(now(),'%Y-%m-%d %H:%i:%S'));
+	</insert>
+	
+	
+
+</mapper>

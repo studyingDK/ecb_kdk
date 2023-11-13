@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration scan="true" scanPeriod="30 seconds">
+ 
+  <appender name="console" class="ch.qos.logback.core.ConsoleAppender">
+    <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+      <pattern>[%d{HH:mm:ss.SSS}][%-5level][%logger{36}.%method:line%line] - %msg%n</pattern>
+    </encoder>
+  </appender>
+
+<!--   <appender name="file" class="ch.qos.logback.core.rolling.RollingFileAppender">
+    <file>C:\Users\NC627\Desktop\02.study</file>
+    <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+      <fileNamePattern>C:\Users\NC627\Desktop\02.study.%d{yyyy-MM-dd}.log</fileNamePattern>
+      <maxHistory>180</maxHistory>
+    </rollingPolicy>
+    <encoder>
+      <pattern>[%d{HH:mm:ss.SSS}][%-5level][%logger.%method:line%line] - %msg%n</pattern>
+    </encoder>
+  </appender>	 -->
+					
+  <logger name="org.springframework" level="info" additivity="false">
+    <appender-ref ref="file" />
+    <appender-ref ref="console" />
+  </logger>
+  <logger name="sample" level="debug" additivity="false">
+    <appender-ref ref="file" />
+    <appender-ref ref="console" />
+  </logger>	
+					
+  <root level="info">
+    <appender-ref ref="console" />
+  </root>
+
+ 
+    <!-- log4jdbc-log4j2 -->
+    <logger name="jdbc.sqlonly"        level="DEBUG"/>
+    <logger name="jdbc.sqltiming"      level="INFO"/>
+    <logger name="jdbc.audit"          level="WARN"/>
+    <logger name="jdbc.resultset"      level="ERROR"/>
+    <logger name="jdbc.resultsettable" level="ERROR"/>
+    <logger name="jdbc.connection"     level="INFO"/>
+
+				
+</configuration>

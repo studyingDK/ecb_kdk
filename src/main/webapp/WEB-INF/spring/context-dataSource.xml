@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mybatis-spring="http://mybatis.org/schema/mybatis-spring"
+	xmlns:jdbc="http://www.springframework.org/schema/jdbc"
+	xsi:schemaLocation="http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc-4.3.xsd
+		http://mybatis.org/schema/mybatis-spring http://mybatis.org/schema/mybatis-spring-1.2.xsd
+		http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd">
+	<!-- context-xx.properties -->
+	<bean id="propertyConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="locations">
+            <list>
+                <value>classpath:spring/com/context-database.properties</value>
+            </list>
+        </property>
+    </bean>
+	<!-- 	<util:properties id="globals" location="classpath:/globals.properties" /> -->
+	<!-- Globals.properties end -->
+	
+	<bean id="dataSource" class="com.zaxxer.hikari.HikariDataSource" lazy-init="true">
+		<property name="driverClassName" value="${Database.driver}"></property>
+		<property name="jdbcUrl" value="${Database.url}"></property>
+		<property name="username" value="${Database.username}"></property>
+		<property name="password" value="${Database.password}"></property>
+	</bean>
+	
+	<!-- MyBatis mapperLocation & configLocation set -->
+	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="dataSource" ref="dataSource"/>
+   		<property name="configLocation" value="classpath:sqlmap/config/sqlAlias.xml"/>
+		<property name="mapperLocations" value="classpath:sqlmap/mappers/**.xml" />
+	</bean>
+	
+	<context:component-scan base-package="com.project.kdkhelloworld" />
+	<!-- ComponentScan -->
+	<mybatis-spring:scan base-package="com.project.kdkhelloworld" />
+
+</beans>
