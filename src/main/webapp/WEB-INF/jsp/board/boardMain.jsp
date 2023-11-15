@@ -26,7 +26,11 @@
 
     #boradMain_header_right {
         display: block;
-        background: url('/images/speech_bubble1.png') no-repeat 200px, url('/images/speech_bubble2.png') no-repeat 400px;
+        background: url('/images/speech_bubble1.png') no-repeat 6rem,
+            url('/images/speech_bubble2.png') no-repeat 20rem,
+            url('/images/speech_bubble2.png') no-repeat 34rem,
+            url('/images/speech_bubble3.png') no-repeat 48rem,
+            url('/images/speech_bubble3.png') no-repeat 62rem;
         height: 120px;
     }
 

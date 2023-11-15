@@ -14,12 +14,21 @@
   #home_header {
     background: url("/images/header-image.jpg") no-repeat center;
     /*margin: 10px 8%;*/
-    height: 180px;
   }
 
-  .home_header_content {
-    display: block;
+  #home_header_content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* home_header 높이 고정 */
+    height: 180px;
     text-align: center;
+  }
+
+  #home_header_content>* {
+    color: white;
+    font-size: 2rem;
+    text-shadow: 2px 2px 2px rgb(247, 239, 227);
   }
 
   /*header end ================================================================*/
@@ -38,7 +47,7 @@
     text-align: center;
   }
 
-  #loginBox {
+  #home_container_loginBox {
     height: 8rem;
     border: 1px solid #D5D8DC;
     border-radius: 10px;
@@ -47,15 +56,16 @@
     justify-content: center;
   }
 
-  #loginTop {
-    color: rgb(88, 155, 233);
-  }
-
   #login {
     cursor: pointer;
   }
 
-  #loginBot {
+  #home_container_loginBox_top {
+    color: rgb(88, 155, 233);
+  }
+
+
+  #home_container_loginBox_bottom {
     width: 14rem;
     height: 4rem;
     border: 1px solid rgb(88, 155, 233);
@@ -71,7 +81,7 @@
     grid-template-columns: 50% 50%;
   }
 
-  .content-Item-border {
+  .content_item_border {
     border: 1px solid #D5D8DC;
     border-radius: 10px;
     margin: 0.5em;
@@ -88,29 +98,39 @@
     background-color: #F5F6F7;
   }
 
-  #footer_grid {
+  #footer_container {
     margin: 0 8%;
     display: grid;
     grid-template-columns: 15% 85%;
   }
 
+  #footer_left {
+    display: flex;
+  }
+
+  #footer_left>* {
+    width: 100%;
+    height: 100%;
+    /* 이미지의 너비를 부모 요소인 .container의 너비와 같게 설정 */
+    height: auto;
+    /* 높이를 자동으로 조절하여 비율을 유지 */
+    text-align: center;
+  }
+
   #footer_right {
-    padding-left: 5px;
+    /* footer 크기 조정 */
+    height: 200px;
+    padding-left: 20px;
     padding-top: 1rem;
     display: grid;
     grid-template-columns: 200px auto;
   }
 
-  .textLine_margin {
-    font-size: 20px;
-    margin-bottom: 1em;
-  }
-
-  .footer_right-title {
+  .footer_right_title {
     font-size: 25px;
   }
 
-  .footer_right-content {
+  .footer_right_content {
     font-size: 25px;
   }
 
@@ -138,13 +158,6 @@
     text-align: center;
   }
 
-  img {
-    width: 100%;
-    /* 이미지의 너비를 부모 요소인 .container의 너비와 같게 설정 */
-    height: auto;
-    /* 높이를 자동으로 조절하여 비율을 유지 */
-  }
-
   #boardPage {
     cursor: pointer;
   }
@@ -153,52 +166,54 @@
 <body>
   <div class="wrap">
     <div id="home_header">
-      <div class="home_header_content">
-        <div style="color: rgb(252, 252, 252);">
-          <h1>제목 문구</h1>
+      <div id="home_header_content">
+        <div>
+          Expansion Community Board
         </div>
-        <div>뭐넣음</div>
-        <div>^^..</div>
-
+        <div></div>
+        <div></div>
       </div>
     </div>
-    <hr class="header_align_line">
 
+    <hr class="header_align_line">
 
     <div id="home_container" class="place_chk">
       <div id="home_container_loginGrid" class="place_chk">
-        <div class="content-Item-border">
-          <button id="boardPage" onclick="boardPageMove()">게시판버튼 임시</button>
+        <div class="content_item_border">
+          <div style="text-align: center;">🔥현재 인기글</div>
         </div>
-        <div id="loginBox">
-          <div id="loginTop"></div>
-          <div id="loginBot">
+        <div id="home_container_loginBox">
+          <div id="home_container_loginBox_top"></div>
+          <div id="home_container_loginBox_bottom">
             <div id="login" onclick="login()">Login</div>
           </div>
         </div>
       </div>
       <div id="grid50x2List">
-        <div class="content-Item-border">리스트1</div>
-        <div class="content-Item-border">리스트2</div>
+        <div class="content_item_border">
+          <div style="text-align: center;">🏆유저 랭킹</div>
+        </div>
+        <div class="content_item_border">
+          <button id="boardPage" onclick="boardPageMove()">게시판버튼 임시</button>
+        </div>
       </div>
     </div>
 
     <hr class="header_align_line">
 
     <div id="footer">
-      <div id="footer_grid">
-        <div class="flex_vertical_center">
-          <img src="/images/pngegg.png" width="150px;" height="150px;"
-            style="background-color: EBEBEB; display: inline-block;">
+      <div id="footer_container">
+        <div id="footer_left">
+          <img src="/images/pngegg.png">
         </div>
         <div id="footer_right">
-          <div class="footer_right-title">Developers</div>
-          <div class="footer_right-content">김도겸</div>
-          <div class="footer_right-title">Contact</div>
-          <div class="footer_right-content">kdkhelloworld@gmail.com<span class="text_verticalLine">|</span>
-            CaffeineHolic_dk</div>
-          <div class="footer_right-title">링크 걸기</div>
-          <div class="footer_right-content">
+          <div class="footer_right_title">Developers</div>
+          <div class="footer_right_content">김도겸</div>
+          <div class="footer_right_title">Contact</div>
+          <div class="footer_right_content">kdkhelloworld@gmail.com<span
+              class="text_verticalLine">|</span>CaffeineHolic_dk</div>
+          <div class="footer_right_title">링크 걸기</div>
+          <div class="footer_right_content">
           </div>
         </div>
       </div>
@@ -218,8 +233,7 @@
     let formattedDate;
 
     window.onload = function () {
-      console.log(formattedDate);
-      $loginTop = document.getElementById("loginTop");
+      $loginTop = document.getElementById("home_container_loginBox_top");
       nowTime();
 
       setInterval(nowTime, 1000);
@@ -233,30 +247,43 @@
       hours = String(now.getHours()).padStart(2, '0');
       minutes = String(now.getMinutes()).padStart(2, '0');
       seconds = String(now.getSeconds()).padStart(2, '0');
-      let formattedDate = `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
+      let formattedDate = year+"-"+month+"-"+day+" "+ hours+":"+minutes+":"+seconds;
       $loginTop.innerText = formattedDate;
     }
 
     function login() {
-      location.href = "/login";
+      let url = "/login"
+      let goPost = document.createElement('form');
+
+      // let data = document.createElement('input');
+
+      // data.setAttribute('type', 'hidden');
+      // data.setAttribute('name', 'userid');
+      // data.setAttribute('value', "테스트");
+
+      // goPost.appendChild(data);
+      goPost.setAttribute('method', 'post');
+      goPost.setAttribute('action', url);
+      document.body.appendChild(goPost);
+      goPost.submit();
     }
 
     function boardPageMove() {
-        let url = "/board/main";
-        let goPost = document.createElement('form');
+      let url = "/board/main"
+      let goPost = document.createElement('form');
 
-        let data = document.createElement('input');
+      let data = document.createElement('input');
 
-        data.setAttribute('type', 'hidden');
-        data.setAttribute('name', 'userid');
-        data.setAttribute('value', "테스트");
+      data.setAttribute('type', 'hidden');
+      data.setAttribute('name', 'userid');
+      data.setAttribute('value', "테스트");
 
-        goPost.appendChild(data);
-        goPost.setAttribute('method', 'post');
-        goPost.setAttribute('action', url);
-        document.body.appendChild(goPost);
-        goPost.submit();
-      }
+      goPost.appendChild(data);
+      goPost.setAttribute('method', 'post');
+      goPost.setAttribute('action', url);
+      document.body.appendChild(goPost);
+      goPost.submit();
+    }
   </script>
   <!-- <script src="sampleAPI.js"></script> -->
 </body>

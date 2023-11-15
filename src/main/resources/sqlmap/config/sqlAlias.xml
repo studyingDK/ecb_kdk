@@ -5,8 +5,11 @@
 <configuration>
 	<typeAliases>
 		<typeAlias type="com.project.kdkhelloworld.login.dto.UserInfoDTO" alias="UserInfoDTO"/>
-		<typeAlias type="com.project.kdkhelloworld.login.dto.UserDetailDTO" alias="UserDetailDTO"/>
+		<typeAlias type="com.project.kdkhelloworld.login.dto.UserInfoDetailDTO" alias="UserInfoDetailDTO"/>
 		<typeAlias type="com.project.kdkhelloworld.login.dto.TotalUserInfoDTO" alias="TotalUserInfoDTO"/>
+		
+		<typeAlias type="com.project.kdkhelloworld.board.dto.BoardListDTO" alias="BoardListDTO"/>
+		
 		<typeAlias type="java.util.Map" alias="Map"/>
 		<typeAlias type="java.lang.Integer" alias="Integer"/>
 		<typeAlias type="java.util.List" alias="List"/>

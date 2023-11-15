@@ -8,13 +8,13 @@ import lombok.Getter;
 import lombok.Setter;
 
 /**
- * userInfoDetail
+ * 유저 개인정보 DTO
  * @author 김도겸
  *
  */
 @Getter
 @Setter
-public class UserDetailDTO {
+public class UserInfoDetailDTO {
 	
 	private String userId; //유저 pk
 	private String userName; //이름

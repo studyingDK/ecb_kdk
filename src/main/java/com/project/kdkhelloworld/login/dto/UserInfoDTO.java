@@ -8,7 +8,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 /**
- * userInfo
+ * 유저 로그인에 필요한 DTO
  * @author 김도겸
  *
  */
@@ -27,7 +27,7 @@ public class UserInfoDTO {
 	private int userVisitCnt; //방문횟수
 	private int userReportCnt; //신고횟수
 	private int userReportedCnt; //신고당한횟수
-	private char userLoginYn; //로그인상태
+	private String userLoginYn; //로그인상태
 	private String regId; //등록id
 	@DateTimeFormat(pattern = "YYYY=MM=DD'T'HH:mm:ss")
 	private Date regDtm; //등록일자
