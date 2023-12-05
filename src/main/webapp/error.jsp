@@ -72,7 +72,7 @@
     </div>
     <script>
         function mainButton() {
-            location.href = "/main";
+            location.href = "/";
         }
 
         function backButton() {

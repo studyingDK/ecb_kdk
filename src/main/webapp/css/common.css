@@ -1,63 +1,10 @@
+/* main ======================================================================== */
 * {
     padding: 0;
     margin: 0;
     font-size: 1.5rem;
     font-family: gowunBatang;
   }
-
-.place_chk {
-    border: 1.2px dashed black;
-  }
-
-.wrap {
-  min-width: 1340px;
-  /* 너비가 최대 화면 너비를 넘지 않도록 설정 */
-  display: flex;
-  flex-direction: column;
-  height: 100vh;
-}
-
-@media (min-width: 1340px) {
-.wrap {
-    overflow-x: hidden;
-    /* 최소 너비 이상에서 스크롤바를 숨깁니다 */
-}
-}
-
-@media (min-width: 768px) {
-  .inner {
-      width: 500px;
-      margin: 0 auto;
-  }
-}
-
-@font-face {
-  font-family: gowunBatang;
-  src: url("/fonts/GowunBatang-Bold.ttf");
-}
-
-
-.radius-button {
-  display: inline-block;
-  overflow: hidden;
-  /* 내용이 태그 바깥으로 벗어나지 않도록 설정 */
-  position: relative;
-  /* 포지션을 설정하여 이미지를 정확한 위치에 배치 */
-  border: none;
-  width: 4rem;
-  height: 4rem;
-  border-radius: 10px;
-  cursor: pointer;
-  margin: 0 1.6rem;
-
-}
-
-.oauth-box {
-  position: absolute;
-  width: 100%;
-  text-align: center;
-  bottom: 0rem;
-}
 
 img {
   position: relative;
@@ -67,31 +14,132 @@ img {
   /* 높이를 자동으로 조절하여 비율을 유지 */
 }
 
-.text_verticalLine {
+
+
+.place_chk {
+    border: 1.2px dashed black;
+  }
+
+.wrap {
+  min-width: 1320px;
+  /* 너비가 최대 화면 너비를 넘지 않도록 설정 */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100vh;
+}
+
+@media (min-width: 1320px) {
+.wrap {
+    overflow-x: hidden;
+    /* 최소 너비 이상에서 스크롤바를 숨깁니다 */
+  }
+}
+
+@media (min-width: 768px) {
+  .inner {
+      width: 500px;
+      margin: 0 auto;
+  }
+}
+
+/* 글꼴 */
+@font-face {
+  font-family: gowunBatang;
+  src: url("/fonts/GowunBatang-Bold.ttf");
+}
+
+
+/* Element ======================================================================= */
+
+
+/* 회색 text용 세로 구분선 */
+.cmm__text-vertical-line {
   color: #c4c7ca;
   font-size: 20px;
   padding: 0 8px;
 }
 
-.header_align_line {
-  background-color: rgb(142, 188, 241);
-  border-top: 3px solid rgb(142, 188, 241);
-  z-index: 1px;
-}
-
-.home_move_button {
+/* 각 컨텐츠 메인페이지 홈버튼 */
+.cmm__home-button {
   background: none;
   color: rgb(142, 188, 241);
   border: none;
   cursor: pointer;
-  text-shadow: 2px 2px 2px #28292b;
-
+  text-shadow: 2px 4px 3px rgb(130, 182, 241);
 }
 
-.flex_vertical_center {
+/* 각 컨텐츠 상세페이지 상단 홈버튼 */
+.cmm__home-button-detail {
+  position: absolute;
+  top: 7px;
+  left: 10px;
+  text-align: left;
+  font-size: 30px;
+}
+
+/* 각 컨텐츠 상세페이지 상단 홈버튼 */
+.cmm__login-button-detail {
+  font-size: 20px;
+  background: none;
+  color: rgb(142, 188, 241);
+  border: 0.5px solid rgb(172, 164, 164);
+  padding: 1px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+/* 회색 구분선 */
+.cmm__ghr {
+  position: relative;
+  border: 1px solid #CECECE;
+  border-left: none;
+  border-right: none;
+  border-right: none;
+  border-bottom: none;
+  height: 8px;
+}
+
+
+/* Block ======================================================================= */
+
+
+.cmm_flex-vertical-center {
   display: flex;
   /* 수직 정렬*/
   align-items: center;
   /* 수평 정렬*/
   justify-content: center;
+}
+
+/* 스크롤 바 관련 클래스 */
+.cmm_scorll-none {
+  -ms-overflow-style: none; /* 인터넷 익스플로러 */
+  scrollbar-width: none; /* 파이어폭스 */
+}
+
+.cmm_scorll-none::-webkit-scrollbar {
+    display: none; /* 크롬, 사파리, 오페라, 엣지 */
+}
+
+
+/* 각 컨텐츠 상세페이지 header navbar */
+.cmm_content-nb {
+  position: absolute;
+  width: 1280px;
+  height: 60px;
+  z-index: 5;
+  background-color: white;
+}
+
+.cmm_content-nb-container {
+  position: absolute;
+  top: 1px;
+  right: 0;
+  text-align: right;
+  color: rgb(83, 83, 83);
+}
+
+.cmm_content-nb-container-content {
+  font-size: 20px;
 }

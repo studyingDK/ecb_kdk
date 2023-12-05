@@ -16,4 +16,7 @@ public class BoardListDTO {
 	private String regId; //등록id
 	@DateTimeFormat(pattern = "YYYY=MM=DD'T'HH:mm:ss")
 	private Date regDtm; //등록일자
+	private String lstUpId; //수정id
+	@DateTimeFormat(pattern = "YYYY=MM=DD'T'HH:mm:ss")
+	private Date lstUpDtm; //수정일자
 }

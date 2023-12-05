@@ -7,93 +7,55 @@
 <head>
     <title>게시판</title>
     <link href="/css/common.css" rel="stylesheet" />
+    <link href="/css/boardMain.css" rel="stylesheet" />
+    <script src="/js/common.js"></script>
 </head>
-<style>
-    /******************************** boardMain-header **********************************/
-
-    #boradMain_header {
-        display: grid;
-        grid-template-columns: 175px auto;
-        width: 100vw;
-        height: 120px;
-        border-bottom: 1px solid #CECECE;
-    }
-
-    #boradMain_header_left {
-        text-align: center;
-        height: 120px;
-    }
-
-    #boradMain_header_right {
-        display: block;
-        background: url('/images/speech_bubble1.png') no-repeat 6rem,
-            url('/images/speech_bubble2.png') no-repeat 20rem,
-            url('/images/speech_bubble2.png') no-repeat 34rem,
-            url('/images/speech_bubble3.png') no-repeat 48rem,
-            url('/images/speech_bubble3.png') no-repeat 62rem;
-        height: 120px;
-    }
-
-    /*boardMain-header end =============================================================*/
-    /******************************* boardMain-container ********************************/
-    .boardMain_Container {
-        display: flex;
-        flex-direction: row;
-        overflow: auto;
-        flex: 1;
-        margin-bottom: 1px;
-    }
-
-    #boardMain_container_nav {
-        flex: 0 0 175px;
-        border-right: 1px solid #CECECE;
-    }
-
-    #boardMain_container_nav>* {
-        padding: 0.4rem 0.8rem;
-        font-size: 1rem;
-    }
-
-    #boardMain_container_content {
-        flex: 1 1 auto;
-        overflow: auto;
-    }
-
-    #boardMain_container_content>* {
-        height: 100%;
-        overflow: auto;
-    }
-
-    /*boardMain-container end ==========================================================*/
-</style>
 
 <body>
     <div class="wrap">
-        <div id="boradMain_header">
-            <div id="boradMain_header_left" class="flex_vertical_center">
-                <button id="mainPage_button" class="home_move_button" onclick="mainPage_button()">ECB</button>
+        <div class="boradMain-header">
+            <div class="boradMain-header-left" class="cmm_flex-vertical-center">
+                <button id="mainPage_button" class="cmm__home-button" onclick="homePageButton()">ECB</button>
             </div>
-            <div id="boradMain_header_right">asd</div>
+            <div class="boradMain-header-right">asd</div>
         </div>
-        <div class="boardMain_Container">
-            <div id="boardMain_container_nav">
+        <div class="boardMain-container">
+            <div id="boardMain-container-nav">
                 <div>게시판홈</div>
                 <div>인기글</div>
                 <div>게시판 목록</div>
             </div>
-            <div id="boardMain_container_content">
-                <div>내용1</div>
-                <div>내용2</div>
-                <div>내용3</div>
-                <div></div>
+            <div id="boardMain-container-content">
+                <div>게시판 목록</div>
+                <div id="boardList"></div>
+                <button class="boardPostPage" onclick="boardPostPage('postpk')">임시 게시판 버튼 이동</button>
             </div>
         </div>
     </div>
+    <c:set var="boardType" value="${boardType}" />
+    <input type="hidden" id="boardType" value="${boardType}">
+    <script>
+        window.onload = function () {
+            console.log("boardType=" + document.getElementById("boardType").value);
+        }
+
+        function boardPostPage(boradPostType) {
+            let url = "/board/" + boradPostType;
+            let goPost = document.createElement('form');
+
+            let data = document.createElement('input');
+
+            data.setAttribute('type', 'hidden');
+            data.setAttribute('name', 'pstCtdCd');
+            data.setAttribute('value', boradPostType);
+            goPost.appendChild(data);
+
+            goPost.setAttribute('method', 'post');
+            goPost.setAttribute('action', url);
+            document.body.appendChild(goPost);
+            goPost.submit();
+        }
+    </script>
 </body>
-<script>
-    function mainPage_button() {
-        location.href = "/";
-    }
-</script>
 
 </html>

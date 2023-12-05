@@ -10,6 +10,8 @@
 		
 		<typeAlias type="com.project.kdkhelloworld.board.dto.BoardListDTO" alias="BoardListDTO"/>
 		
+		<typeAlias type="com.project.common.pagination.dto.PaginationDTO" alias="PaginationDTO"/>
+		
 		<typeAlias type="java.util.Map" alias="Map"/>
 		<typeAlias type="java.lang.Integer" alias="Integer"/>
 		<typeAlias type="java.util.List" alias="List"/>

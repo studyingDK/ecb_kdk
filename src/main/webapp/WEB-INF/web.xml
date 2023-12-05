@@ -22,7 +22,7 @@
 	</servlet-mapping>
 	
 	
-	<!-- The definition of the Root Spring Container shared by all Servlets and Filters -->
+	<!-- The definition of the Root Spring Container shared by all Servlets-->
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
 		<param-value>/WEB-INF/spring/context-dataSource.xml</param-value>
@@ -49,12 +49,16 @@
 	
 	<!-- Filter CharacterEncoding -->
 	<filter>
-	    <filter-name>CharacterEncodingFilter</filter-name>
-	    <filter-class>com.project.common.CharacterEncodingFilter</filter-class>
+		<filter-name>CharacterEncodingFilter</filter-name>
+		<filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+		<init-param>
+			<param-name>CharacterEncodingFilter</param-name>
+			<param-value>UTF-8</param-value>
+		</init-param>
 	</filter>
 	<filter-mapping>
-	    <filter-name>CharacterEncodingFilter</filter-name>
-	    <url-pattern>/*</url-pattern>
+		<filter-name>CharacterEncodingFilter</filter-name>
+			<url-pattern>/*</url-pattern>
 	</filter-mapping>
 	
 	<!-- Creates the Spring Container shared by all Servlets and Filters -->

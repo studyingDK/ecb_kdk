@@ -19,6 +19,7 @@ public class PostInfoDTO {
 	private String pstCtgCd; //게시글 종류
 	private int pstNo; //게시글 번호
 	private String pstTypeCd; //게시글 유형
+	private String pstTitlePrefix; //게시글 말머리 
 	private String pstTitle; //게시글 제목 
 	private String pstContent; //게시글내용
 	private int pstLikeCnt; //좋아요 개수

@@ -1,0 +1,65 @@
+/* 게시글 컨테이너 반갈 */
+.boardPost-container-contents-twoColumns {
+    display: grid;
+    grid-template-columns: auto 250px;
+}
+
+/* 게시글 말머리, 제목 줄 */
+.boardPost-container-contents-rows {
+    margin-top: 10px;
+}
+
+/* 게시글 조건 문구 */
+.boardPost-container-contents-rows-status {
+    display: grid;
+    grid-template-columns: 140px auto;
+    font-size: 23px;
+}
+
+/* 조건 글자 크기*/
+.boardPost-container-contents-rows__comment {
+    font-size: 28px;
+}
+
+
+
+select {
+    border: 1px solid black;
+    border-radius: 4px;
+    font-size: 22px;
+    cursor: pointer;
+}
+
+select>* {
+    font-size: 22px;
+}
+
+input {
+    font-size: 25px;
+    cursor: pointer;
+    border-radius: 4px;
+    border: 1px solid black;
+}
+
+
+/* 말머리 */
+select[name="pstTitlePrefix"] {
+    flex-basis: 250px;
+    margin-left: 30px;
+}
+
+/* 제목 */
+input[name="pstTitle"] {
+    width: 99.8%;
+}
+
+/* 글내용 */
+textarea {
+    width: 99.7%;
+}
+
+/* 조건 라디오 */
+input[type="radio"] {
+    width: 23px;
+    height: 23px;
+}

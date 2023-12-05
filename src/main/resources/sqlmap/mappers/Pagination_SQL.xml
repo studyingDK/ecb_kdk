@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.project.common.pagination.mapper.PaginationMapper">
+	<select id="getTotalItem" parameterType="map" resultType="PaginationDTO">
+		select count(*) as totalItem
+		from tbl_maxrent_stat
+		where 1=1
+		<if test="#{searchKeyword} != null and #{searchKeyword} == name">
+			and reg_user like #{reg_user}||%
+		</if>
+		<if test="#{searchKeyword} != null and #{searchKeyword} == date">
+			and date_format(reg_date,'%Y-%m-%d') = date_format(#{reg_date},'%Y-%m-%d')
+		</if>
+		<if test="#{searchKeyword} != null and #{searchKeyword} == ipAddr">
+			and ip_addr like #{ipAddr}||%
+		</if>
+	</select>
+	
+	<select id="selectCurPage" parameterType="map" resultType="PaginationDTO">
+				select 	rent_no as rentNo
+						,room_cnt as roomCnt
+						,month_rent as monthRent
+						,unit_rent as unitRent
+						,maint_cost as maintCost
+						,best_rent as bestRent
+						,rent_room_cnt as rentRoomCnt
+						,max_profit as maxProfit
+						,reg_user as regUser
+						,ip_addr as ipAddr
+						,reg_date as regDate
+				from tbl_maxrent_stat
+				where 1=1
+				<if test="#{searchKeyword} != null and #{searchKeyword} == regUser">
+					and reg_user like #{reg_user}||%
+				</if>
+				<if test="#{searchKeyword} != null and #{searchKeyword} == regDate">
+					and date_format(reg_date,'%Y-%m-%d') = date_format(#{reg_date},'%Y-%m-%d')
+				</if>
+				<if test="#{searchKeyword} != null and #{searchKeyword} == ipAddr">
+					and ip_addr like #{ipAddr}||%
+				</if>
+					order by #{pageSortKeyword} #{pageSortType}
+					limit #{startNum}, #{endNum}
+	</select>
+</mapper>

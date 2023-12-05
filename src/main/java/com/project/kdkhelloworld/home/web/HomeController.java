@@ -24,7 +24,6 @@ public class HomeController {
 	@RequestMapping(value = "/")
 	public String mainPageRedirect(HttpServletRequest request) {
 		
-
 		return "redirect:/home";
 	}
 	

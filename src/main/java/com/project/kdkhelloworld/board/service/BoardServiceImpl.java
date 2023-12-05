@@ -4,6 +4,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.project.kdkhelloworld.board.dto.BoardListDTO;
+import com.project.kdkhelloworld.board.dto.PostInfoDTO;
 
 public class BoardServiceImpl implements BoardService {
 	
@@ -26,6 +27,12 @@ public class BoardServiceImpl implements BoardService {
 	 * 게시글 생성
 	 */
 	
+	@Override
+	public PostInfoDTO postWrite() {
+		
+		return null;
+	}
+	
 	/**
 	 * 게시글 수정
 	 */
@@ -33,5 +40,12 @@ public class BoardServiceImpl implements BoardService {
 	/**
 	 * 게시글 삭제
 	 */
+	
+	/**
+	 * 게시판 생성
+	 */
+
+	
+	
 
 }
