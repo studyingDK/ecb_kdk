@@ -1,28 +1,17 @@
 package com.project.kdkhelloworld.login.service;
 
-import javax.annotation.Resource;
-import javax.servlet.http.HttpServletRequest;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.jdbc.datasource.DataSourceTransactionManager;
-import org.springframework.stereotype.Service;
-
-import com.project.kdkhelloworld.login.dto.TotalUserInfoDTO;
-import com.project.kdkhelloworld.login.mapper.LoginMapper;
 
 /**
  * 로그인 관련 서비스
  * @author 김도겸
  *
  */
-@Service
-public class LoginServiceImpl implements LoginService{
+public class LoginServiceImpl implements LoginService {
 	
 	private static final Logger logger = LoggerFactory.getLogger(LoginServiceImpl.class);
 	
-	@Resource(name="LoginMapper")
-	private LoginMapper loginMapper;
 	
 //	@Resource(name="txManager")
 //	private DataSourceTransactionManager transactionManager;
@@ -60,39 +49,39 @@ public class LoginServiceImpl implements LoginService{
 	/**
 	 * 신규 회원가입 data set
 	 */
-	@Override
-	public TotalUserInfoDTO newMemberData(HttpServletRequest req) throws Exception {
-		TotalUserInfoDTO dto = new TotalUserInfoDTO();
-		
-		dto.setUserId(req.getParameter("userId"));
-		dto.setLoginId(req.getParameter("setLoginId"));
-		dto.setPassword(req.getParameter("password")); 
-		dto.setNickname(req.getParameter("nickname")); 
-		dto.setUserPhoto(req.getParameter("userPhoto")); 
-		dto.setUserName(req.getParameter("userName"));
-		dto.setUserGender(req.getParameter("userGender"));
-		dto.setUserName(req.getParameter("userPhone"));
-		dto.setUserBirthCd(req.getParameter("userBirthCd")); 
-		dto.setUserPhone(req.getParameter("userPhone")); 
-		dto.setUserZipCd(req.getParameter("userZipCd")); 
-		dto.setUserAddress(req.getParameter("userAddress"));
-		dto.setUserAddressDetail(req.getParameter("userAddressDetail"));
-		dto.setUserSecondaryEmail(req.getParameter("userSecondaryEmail"));
-
-		return dto;
-	}
+//	@Override
+//	public TotalUserInfoDTO newMemberData(HttpServletRequest req) throws Exception {
+//		TotalUserInfoDTO dto = new TotalUserInfoDTO();
+//		
+//		dto.setUserId(req.getParameter("userId"));
+//		dto.setLoginId(req.getParameter("setLoginId"));
+//		dto.setPassword(req.getParameter("password")); 
+//		dto.setNickname(req.getParameter("nickname")); 
+//		dto.setUserPhoto(req.getParameter("userPhoto")); 
+//		dto.setUserName(req.getParameter("userName"));
+//		dto.setUserGender(req.getParameter("userGender"));
+//		dto.setUserName(req.getParameter("userPhone"));
+//		dto.setUserBirthCd(req.getParameter("userBirthCd")); 
+//		dto.setUserPhone(req.getParameter("userPhone")); 
+//		dto.setUserZipCd(req.getParameter("userZipCd")); 
+//		dto.setUserAddress(req.getParameter("userAddress"));
+//		dto.setUserAddressDetail(req.getParameter("userAddressDetail"));
+//		dto.setUserSecondaryEmail(req.getParameter("userSecondaryEmail"));
+//
+//		return dto;
+//	}
 	
 	/**
 	 * 신규 회원가입 data insert
 	 */
-	@Override
-	public void insertMemberJoin(TotalUserInfoDTO dto) throws Exception {
-		logger.info("===================== 회원 데이터 insert 시작 =====================");
-		
-		loginMapper.insertUserInfo(dto);
-		loginMapper.insertUserDetail(dto);
-		
-		logger.info("===================== 회원 데이터 insert 종료 =====================");
-	}
+//	@Override
+//	public void insertMemberJoin(TotalUserInfoDTO dto) throws Exception {
+//		logger.info("===================== 회원 데이터 insert 시작 =====================");
+//		
+//		loginMapper.insertUserInfo(dto);
+//		loginMapper.insertUserDetail(dto);
+//		
+//		logger.info("===================== 회원 데이터 insert 종료 =====================");
+//	}
 
 }

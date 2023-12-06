@@ -1,9 +1,5 @@
 package com.project.kdkhelloworld.login.service;
 
-import javax.servlet.http.HttpServletRequest;
-
-import com.project.kdkhelloworld.login.dto.TotalUserInfoDTO;
-
 public interface LoginService {
 	
 	/**
@@ -14,10 +10,10 @@ public interface LoginService {
 	/**
 	 * 신규 회원가입 data set
 	 */
-	public TotalUserInfoDTO newMemberData(HttpServletRequest req) throws Exception;
+//	public TotalUserInfoDTO newMemberData(HttpServletRequest req) throws Exception;
 	
 	/**
 	 * 신규 회원가입 data insert
 	 */
-	public void insertMemberJoin(TotalUserInfoDTO dto) throws Exception;
+//	public void insertMemberJoin(TotalUserInfoDTO dto) throws Exception;
 }

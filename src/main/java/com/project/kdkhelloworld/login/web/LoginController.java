@@ -26,9 +26,6 @@ public class LoginController {
 	
 	private static final Logger logger = LoggerFactory.getLogger(LoginController.class);
 	
-	@Resource
-	private LoginServiceImpl loginServiceImpl;
-	
 	/**
 	 * 로그인 페이지 진입
 	 */
@@ -61,9 +58,9 @@ public class LoginController {
 	    }
 		
 		TotalUserInfoDTO dto = new TotalUserInfoDTO();
-		dto = loginServiceImpl.newMemberData(request);
-		
-		loginServiceImpl.insertMemberJoin(dto);
+//		dto = loginServiceImpl.newMemberData(request);
+//		
+//		loginServiceImpl.insertMemberJoin(dto);
 		
 		//회원가입 끝나고 난 후 다시 로그인 페이지로
 		

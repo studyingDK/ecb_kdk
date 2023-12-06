@@ -1,8 +1,11 @@
 package com.project.kdkhelloworld.board.web;
 
-import java.net.http.HttpRequest;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
 import org.slf4j.Logger;
@@ -13,10 +16,13 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.project.kdkhelloworld.board.dto.PostInfoDTO;
+import com.project.kdkhelloworld.board.mapper.BoardMapper;
+import com.project.kdkhelloworld.board.service.BoardService;
 
 /**
  * 게시판 관련 Controller
@@ -28,6 +34,10 @@ import com.project.kdkhelloworld.board.dto.PostInfoDTO;
 public class BoardController {
 	
 	private static final Logger logger = LoggerFactory.getLogger(BoardController.class);
+	
+	@Resource
+	private BoardService boardService;
+
 	
 	/**
 	 * 게시판 메인페이지 진입
@@ -81,9 +91,32 @@ public class BoardController {
 	@PostMapping(value="/{pstCtdCd}/postwrite")
 	public String postWritePage(HttpServletRequest request, Model model, @RequestParam String pstCtdCd) {
 		String boardType = request.getParameter("pstCtdCd"); //게시판 종류
-		//해당 게시판 카테고리
 		
+		Map<String, String> map = new HashMap<>();
+		map.put("pstCtgCd", boardType);
+		
+		//카테고리 세팅
+		List<PostInfoDTO> typeCdList = boardService.pstTypeCdList(map); 
+		List<String> pstTypeCd = new ArrayList<>();
+		
+		for (PostInfoDTO tmp: typeCdList) {
+			pstTypeCd.add(tmp.getPstTypeCd());
+		}
+		
+		//말머리 세팅
+		List<PostInfoDTO> prefixList = boardService.pstPrefixList(map);
+		List<String> pstTitlePrefix = new ArrayList<>();
+		
+		for (PostInfoDTO tmp: prefixList) {
+			pstTitlePrefix.add(tmp.getPstTitlePrefix());
+		}
+		
+		
+		
+
 		model.addAttribute("boardType", boardType);
+		model.addAttribute("titlePrefixList", pstTitlePrefix);
+		model.addAttribute("typeCdList", pstTypeCd);
 		
 		return "/board/boardPost";
 	}
@@ -91,20 +124,19 @@ public class BoardController {
 	/**
 	 * 게시글 생성
 	 */
-	@PostMapping(value="/postCreate")
+	@RequestMapping(value="/postCreate",  method = RequestMethod.POST)
 	@ResponseBody
-	public String postWrite(HttpServletRequest request, @RequestBody PostInfoDTO dto) throws Exception{			
-//		String pstCtdCd = dto.getPstCtgCd(); //게시글 종류 (게시판)
-//		String pstTypeCd = dto.getPstTypeCd(); //게시글 유형 (카테고리)
-//		String pstTitlePrefix= dto.getPstTitlePrefix(); //게시글 말머리 
-//		String pstTitle = dto.getPstTitle(); //게시글 제목 
-//		String pstContent = dto.getPstContent(); //게시글내용
-//		String pstCommentYn = dto.getPstCommentYn(); //댓글게시유무 (E:모두허용,M:회원만, N:허용안함)
-//		String pstLookupChk = dto.getPstLookupChk(); //조회조건 (E:모두허용,M:회원만)
-//		String pstCommnetChk  = dto.getPstCommnetChk(); //댓글조건 (나중에 명확하게 분류 - 레벨, 조건없음 등)
+	public String postWrite(@RequestBody PostInfoDTO dto) throws Exception {
 		
-		//데이터 넘어가는거 까지 확인했고 글 서비스쪽에서 insert 로직짜기
+		try {
+			boardService.postWriteCreate(dto);
+		}
+		catch(Exception e) {
+			logger.error("글 생성중 오류 발생 : "+e.getMessage());
+			return "fail";
+		}
 		
+		//실패하면 알 수 있게 fail 리턴
 		return "success";
 	}
 	

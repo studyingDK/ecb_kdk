@@ -33,9 +33,15 @@
                 <div class="boardPost-container-contents-twoColumns">
                     <select name="pstTypeCd" id="pstTypeCd">
                         <option value="none">카테고리 선택</option>
+                        <c:forEach items="${typeCdList}" var="item">
+                            <option value="${item}">${item}</option>
+                    	</c:forEach>
                     </select>
                     <select name="pstTitlePrefix" id="pstTitlePrefix">
                         <option value="none">말머리 선택</option>
+                        <c:forEach items="${titlePrefixList}" var="item">
+                            <option value="${item}">${item}</option>
+                    	</c:forEach>
                     </select>
                 </div>
                 <div class="boardPost-container-contents-rows">
@@ -85,8 +91,8 @@
             </div>
         </div>
     </div>
-    <c:set var="boardType" value="${boardType}" />
     <input type="hidden" id="boardType" value="${boardType}">
+    <input type="hidden" id="titlePrefixList" value="${titlePrefixList}">
 
     <script>
         CKEDITOR.replace('editor1', { height: 500 }); //에디터 관련 (높이값)
@@ -106,32 +112,12 @@
 
         window.onload = function () {
             document.getElementById("boardName").innerText = "게시판 이름";
-            setCategoryList();
-            setTitleStatus();
             //console.log(document.getElementById("pstCtgCd").value);
 
             $pstCommentYn = document.querySelectorAll('input[name = "pstCommentYn"]');
-            console.log(document.getElementById("boardType").value);
-
 
             CommnetChk(); // 처음 로드할 때 실행
             $pstCommentYn.forEach(radio => radio.addEventListener('change', CommnetChk));
-        }
-
-
-        //게시판 카테고리 세팅
-        function setCategoryList() {
-            $pstTypeCd = document.querySelector("select[name='pstTypeCd']");
-            //controller에서 값 세팅해주는 로직 짜야됨(순서는 거기서 세팅)
-            $pstTypeCd.insertAdjacentHTML('beforeend', '<option value=' + pstTypeCd + '>세팅 테스트</option>');
-        }
-
-        //게시판 말머리 세팅
-        function setTitleStatus() {
-            $pstTitlePrefix = document.querySelector("select[name='pstTitlePrefix']");
-            //controller에서 값 세팅해주는 로직 짜야됨(순서는 거기서 세팅)
-            $pstTitlePrefix.insertAdjacentHTML('beforeend', '<option value=' + pstTitlePrefix + '>세팅 테스트</option>');
-
         }
 
         //댓글게시유무 회원일 때 댓글조건 활성화
@@ -157,8 +143,16 @@
             //Validation 성공 시 실행
             if (result == true) {
                 postWriteSubmit().then((res) => {
-                    console.log("글작성 성공! "+res);
-                    console.log("글작성 성공! 원래 페이지로 돌아가자");
+                    if ('fail' == res) {
+                        location.href = "/error";
+                    }
+                    else {
+                        alert("글 작성이 완료되었습니다.");
+
+                        setTimeout(function () {
+                            window.close();
+                        }, 500);
+                    }
                 });
             }
         }
@@ -231,7 +225,7 @@
                         resolve(res);
                     } else {
                         console.error(xhr.status, xhr.statusText);
-                        reject(new Error(xhr.status));
+                        location.href = "/error";
                     }
                 };
             });

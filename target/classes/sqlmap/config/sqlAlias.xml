@@ -4,14 +4,14 @@
   "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
 	<typeAliases>
-		<typeAlias type="com.project.kdkhelloworld.login.dto.UserInfoDTO" alias="UserInfoDTO"/>
-		<typeAlias type="com.project.kdkhelloworld.login.dto.UserInfoDetailDTO" alias="UserInfoDetailDTO"/>
-		<typeAlias type="com.project.kdkhelloworld.login.dto.TotalUserInfoDTO" alias="TotalUserInfoDTO"/>
+<!-- 		<typeAlias alias="UserInfoDTO" type="com.project.kdkhelloworld.login.dto.UserInfoDTO"/>
+		<typeAlias alias="UserInfoDetailDTO" type="com.project.kdkhelloworld.login.dto.UserInfoDetailDTO"/>
+		<typeAlias alias="TotalUserInfoDTO" type="com.project.kdkhelloworld.login.dto.TotalUserInfoDTO"/> -->
 		
-		<typeAlias type="com.project.kdkhelloworld.board.dto.BoardListDTO" alias="BoardListDTO"/>
+<!-- 		<typeAlias alias="BoardListDTO" type="com.project.kdkhelloworld.board.dto.BoardListDTO"/> -->
+		<typeAlias alias="PostInfoDTO" type="com.project.kdkhelloworld.board.dto.PostInfoDTO"/>
 		
-		<typeAlias type="com.project.common.pagination.dto.PaginationDTO" alias="PaginationDTO"/>
-		
+		<typeAlias type="java.lang.String" alias="String"/>
 		<typeAlias type="java.util.Map" alias="Map"/>
 		<typeAlias type="java.lang.Integer" alias="Integer"/>
 		<typeAlias type="java.util.List" alias="List"/>

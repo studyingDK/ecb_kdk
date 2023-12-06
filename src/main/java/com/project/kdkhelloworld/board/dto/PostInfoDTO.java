@@ -16,7 +16,7 @@ import lombok.Setter;
 @Setter
 public class PostInfoDTO {
 	private String pstId; //게시글 pk
-	private String pstCtgCd; //게시글 종류
+	private String pstCtgCd; //게시판 종류
 	private int pstNo; //게시글 번호
 	private String pstTypeCd; //게시글 유형
 	private String pstTitlePrefix; //게시글 말머리 

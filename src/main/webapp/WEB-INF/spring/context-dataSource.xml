@@ -12,7 +12,7 @@
 	<bean id="propertyConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
         <property name="locations">
             <list>
-                <value>classpath:spring/com/context-database.properties</value>
+                <value>classpath:/spring/com/context-database.properties</value>
             </list>
         </property>
     </bean>
@@ -29,12 +29,11 @@
 	<!-- MyBatis mapperLocation & configLocation set -->
 	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
 		<property name="dataSource" ref="dataSource"/>
-   		<property name="configLocation" value="classpath:sqlmap/config/sqlAlias.xml"/>
-		<property name="mapperLocations" value="classpath:sqlmap/mappers/**.xml" />
+   		<property name="configLocation" value="classpath:/sqlmap/config/sqlAlias.xml"/>
+		<property name="mapperLocations" value="classpath:/sqlmap/mappers/*.xml" />
 	</bean>
 	
-	<context:component-scan base-package="com.project.kdkhelloworld" />
-	<!-- ComponentScan -->
-	<mybatis-spring:scan base-package="com.project.kdkhelloworld" />
+	<!-- mybatis ComponentScan -->
+ 	<mybatis-spring:scan base-package="com.project.kdkhelloworld" annotation="org.springframework.stereotype.Repository" />
 
 </beans>

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.project.kdkhelloworld.board.mapper.BoardMapper">
+
+	<!-- 게시글 insert -->
+	<insert id="insertCreatePost" parameterType="PostInfoDTO">
+		insert into pcb_posts(pst_ctg_cd, pst_no, pst_type_cd, pst_title_prefix, pst_title, pst_content, pst_comment_yn, pst_lookup_chk, pst_commnet_chk)
+		values(#{pstCtgCd}, (select pst_no+1 as pst_no from pcb_posts_no where pst_ctg_cd = #{pstCtgCd}), #{pstTypeCd}, #{pstTitlePrefix}, #{pstTitle}, #{pstContent}, #{pstCommentYn}, #{pstLookupChk}, #{pstCommnetChk})
+	</insert>
+	
+	<!-- 해당 게시판 글 번호 +1 -->
+	<update id="updatePstNo" parameterType="PostInfoDTO">
+		update pcb_posts_no set 
+		pst_no = (select pst_no+1 as pst_no from pcb_posts_no where pst_ctg_cd = #{pstCtgCd}),
+		reg_dtm = date_format(CURRENT_TIMESTAMP,'%Y-%m-%d %H:%i:%S') 
+		where pst_ctg_cd = #{pstCtgCd}
+	</update>
+	
+	<!-- 게시글 카테고리 리스트 조회 -->
+	<select id="selectPstTypeCd" parameterType="Map" resultType="PostInfoDTO">
+		select pst_type_cd as pstTypeCd
+		from pcb_pst_type_cd_list 
+		where pst_ctg_cd = #{pstCtgCd} 
+		order by pst_order
+	</select>
+	
+	<!-- 게시글 말머리 리스트 조회 -->
+	<select id="selectTitlePrefix" parameterType="Map" resultType="PostInfoDTO">
+		select pst_title_prefix as pstTitlePrefix
+		from pcb_pst_title_prefix_list 
+		where pst_ctg_cd = #{pstCtgCd} 
+		order by pst_order
+	</select>
+</mapper>
