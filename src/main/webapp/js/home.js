@@ -40,7 +40,7 @@ function nowTime() {
 
 //로그인 페이지 이동
 function login() {
-  let url = "/jsp/login"
+  let url = "/login";
   let goPost = document.createElement('form');
 
   // let data = document.createElement('input');

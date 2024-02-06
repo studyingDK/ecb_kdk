@@ -150,6 +150,11 @@
     margin-right: 25px;
     cursor: pointer;
   }
+  
   .home__social-icon i:hover {
     color: #5A96EB;
   }
+  
+  #login {
+	cursor: pointer;
+}

@@ -27,18 +27,17 @@
     <appender-ref ref="console" />
   </logger>	
 					
-  <root level="info">
+  <root level="DEBUG">
     <appender-ref ref="console" />
   </root>
 
- 
-    <!-- log4jdbc-log4j2 -->
-    <logger name="jdbc.sqlonly"        level="DEBUG"/>
-    <logger name="jdbc.sqltiming"      level="INFO"/>
-    <logger name="jdbc.audit"          level="WARN"/>
-    <logger name="jdbc.resultset"      level="ERROR"/>
-    <logger name="jdbc.resultsettable" level="ERROR"/>
-    <logger name="jdbc.connection"     level="INFO"/>
+  <!-- log4jdbc-log4j2 -->
+  <logger name="jdbc.sqlonly"        level="DEBUG"/>
+  <logger name="jdbc.sqltiming"      level="INFO"/>
+  <logger name="jdbc.audit"          level="WARN"/>
+  <logger name="jdbc.resultset"      level="ERROR"/>
+  <logger name="jdbc.resultsettable" level="ERROR"/>
+  <logger name="jdbc.connection"     level="INFO"/>
 
 				
 </configuration>

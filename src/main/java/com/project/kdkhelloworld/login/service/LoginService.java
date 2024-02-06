@@ -1,19 +1,24 @@
 package com.project.kdkhelloworld.login.service;
 
+import java.util.Map;
+
+import com.project.kdkhelloworld.login.dto.UserInfoDTO;
+
 public interface LoginService {
 	
 	/**
-	 * 로그인
+	 * 로그인 확인
 	 */
-//	public UserInfoDTO memberJoinInfo(Map<String, Object> map) throws Exception;
+	public UserInfoDTO getloginVO(Map<String, Object> map);
 	
 	/**
-	 * 신규 회원가입 data set
+	 * 유저 아이디 중복조회
 	 */
-//	public TotalUserInfoDTO newMemberData(HttpServletRequest req) throws Exception;
+	public String checkDuplicateLoginId(Map<String, String> map);
+	
 	
 	/**
-	 * 신규 회원가입 data insert
+	 * 회원가입 데이터 저장
 	 */
-//	public void insertMemberJoin(TotalUserInfoDTO dto) throws Exception;
+	public void userinfoSave(Map<String, Object> map);
 }

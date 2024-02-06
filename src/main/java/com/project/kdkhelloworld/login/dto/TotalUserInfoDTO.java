@@ -9,7 +9,7 @@ import lombok.Setter;
 
 /**
  * 모든 유저정보 요소
- * @author 김도겸
+ * @author kdkhelloworld
  *
  */
 @Getter

@@ -33,7 +33,6 @@
 		<property name="mapperLocations" value="classpath:/sqlmap/mappers/*.xml" />
 	</bean>
 	
-	<!-- mybatis ComponentScan -->
  	<mybatis-spring:scan base-package="com.project.kdkhelloworld" annotation="org.springframework.stereotype.Repository" />
 
 </beans>

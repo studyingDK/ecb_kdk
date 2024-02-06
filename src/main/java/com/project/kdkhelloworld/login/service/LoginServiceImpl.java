@@ -1,87 +1,87 @@
 package com.project.kdkhelloworld.login.service;
 
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Optional;
+import java.util.UUID;
+
+import javax.annotation.Resource;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.project.common.ECBCommon;
+import com.project.kdkhelloworld.login.dto.UserInfoDTO;
+import com.project.kdkhelloworld.login.mapper.LoginMapper;
 
 /**
  * 로그인 관련 서비스
- * @author 김도겸
+ * @author kdkhelloworld
  *
  */
+@Service
 public class LoginServiceImpl implements LoginService {
 	
 	private static final Logger logger = LoggerFactory.getLogger(LoginServiceImpl.class);
 	
+	@Resource(name="LoginMapper")
+	private LoginMapper mapper;
 	
-//	@Resource(name="txManager")
-//	private DataSourceTransactionManager transactionManager;
-	
-	/**
-	 * 로그인
-	 */
-//	@Override
-//	public UserInfoDTO test() throws Exception {
-//			
-//		//Data set
-//		UserInfoDTO userInfo = new UserInfoDTO();
-//		userInfo.setUserId((String) map.get("userId"));
-//		userInfo.setLoginId((String) map.get("setLoginId"));
-//		userInfo.setPassword((String) map.get("password")); 
-//		userInfo.setNickname((String) map.get("nickname")); 
-//		userInfo.setUserPhoto((String) map.get("userPhoto")); 
-//		userInfo.setUserPostsCnt((int) map.get("userPostsCnt"));
-//		userInfo.setUserCommentsCnt((int) map.get("userCommentsCnt"));
-//		userInfo.setUserLevel((int) map.get("userLevel"));
-//		userInfo.setUserVisitCnt((int) map.get("userVisitCnt"));
-//		userInfo.setUserReportCnt((int) map.get("userReportCnt"));
-//		userInfo.setUserReportedCnt((int) map.get("userReportedCnt"));
-//		userInfo.setUserReportedCnt((char) map.get("userLoginYn"));
-//		userInfo.setRegId((String) map.get("regId"));
-//		userInfo.setRegDtm((Date) map.get("regDtm"));
-//		userInfo.setLstUpId((String) map.get("lstUpId"));
-//		userInfo.setLstUpDtm((Date) map.get("lstUpDtm"));
-//		
-//		return userInfo;
-//	}
-	
-
+	@Autowired
+	private ECBCommon common;
 	
 	/**
-	 * 신규 회원가입 data set
+	 * 로그인 확인
 	 */
-//	@Override
-//	public TotalUserInfoDTO newMemberData(HttpServletRequest req) throws Exception {
-//		TotalUserInfoDTO dto = new TotalUserInfoDTO();
-//		
-//		dto.setUserId(req.getParameter("userId"));
-//		dto.setLoginId(req.getParameter("setLoginId"));
-//		dto.setPassword(req.getParameter("password")); 
-//		dto.setNickname(req.getParameter("nickname")); 
-//		dto.setUserPhoto(req.getParameter("userPhoto")); 
-//		dto.setUserName(req.getParameter("userName"));
-//		dto.setUserGender(req.getParameter("userGender"));
-//		dto.setUserName(req.getParameter("userPhone"));
-//		dto.setUserBirthCd(req.getParameter("userBirthCd")); 
-//		dto.setUserPhone(req.getParameter("userPhone")); 
-//		dto.setUserZipCd(req.getParameter("userZipCd")); 
-//		dto.setUserAddress(req.getParameter("userAddress"));
-//		dto.setUserAddressDetail(req.getParameter("userAddressDetail"));
-//		dto.setUserSecondaryEmail(req.getParameter("userSecondaryEmail"));
-//
-//		return dto;
-//	}
+	@Override
+	public UserInfoDTO getloginVO(Map<String, Object> map) {	
+		UserInfoDTO result = new UserInfoDTO();
+		
+		//유저 정보 or 체크용 판별
+		if ("Y".equals(map.get("check"))) {
+			logger.debug("유저정보 ");
+			result = mapper.selectLoginVO(map);
+		}
+		else {
+			logger.debug("체크용 ");
+			map.put("sPassword", common.hashPassword(map.get("sPassword").toString()));
+			result = mapper.selectLoginCheck(map);
+		}
+		
+		return result;
+	}
 	
 	/**
-	 * 신규 회원가입 data insert
+	 * 중복조회
 	 */
-//	@Override
-//	public void insertMemberJoin(TotalUserInfoDTO dto) throws Exception {
-//		logger.info("===================== 회원 데이터 insert 시작 =====================");
-//		
-//		loginMapper.insertUserInfo(dto);
-//		loginMapper.insertUserDetail(dto);
-//		
-//		logger.info("===================== 회원 데이터 insert 종료 =====================");
-//	}
-
+	@Override
+	public String checkDuplicateLoginId(Map<String, String> map) {
+		Optional<String> result = Optional.ofNullable(mapper.selectDuplicateLoginId(map));
+		
+		// 조회되는 값 없으면 중복X
+		if (!result.isPresent()) {
+			return "possible";
+		}
+		
+		return "duplicate";
+	}
+	
+	/**
+	 * 입력 받은 회원 데이터 저장
+	 */
+	@Override
+	public void userinfoSave(Map<String, Object> map) {
+		UUID myUuid = UUID.randomUUID();
+		String user = myUuid.toString().replace("-", ""); 
+		
+		map.put("sUserId", user);
+		map.put("sPassword", common.hashPassword(map.get("sPassword").toString()));
+		map.put("sloginType", "L");
+		
+		//try catch랑 트랜잭션 처리 필요.
+		mapper.insertUserinfo(map);
+		mapper.insertUserinfoDetail(map);	
+	}
 }

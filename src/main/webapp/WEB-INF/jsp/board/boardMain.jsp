@@ -14,7 +14,7 @@
 <body>
     <div class="wrap">
         <div class="boradMain-header">
-            <div class="boradMain-header-left" class="cmm_flex-vertical-center">
+            <div class="boradMain-header-left cmm_flex-vertical-center">
                 <button id="mainPage_button" class="cmm__home-button" onclick="homePageButton()">ECB</button>
             </div>
             <div class="boradMain-header-right">asd</div>
@@ -28,17 +28,12 @@
             <div id="boardMain-container-content">
                 <div>게시판 목록</div>
                 <div id="boardList"></div>
+                <!-- 게시판 목록 따로 로직 짜면 각 함수에 pk 집어넣기 -->
                 <button class="boardPostPage" onclick="boardPostPage('postpk')">임시 게시판 버튼 이동</button>
             </div>
         </div>
     </div>
-    <c:set var="boardType" value="${boardType}" />
-    <input type="hidden" id="boardType" value="${boardType}">
     <script>
-        window.onload = function () {
-            console.log("boardType=" + document.getElementById("boardType").value);
-        }
-
         function boardPostPage(boradPostType) {
             let url = "/board/" + boradPostType;
             let goPost = document.createElement('form');
@@ -46,7 +41,7 @@
             let data = document.createElement('input');
 
             data.setAttribute('type', 'hidden');
-            data.setAttribute('name', 'pstCtdCd');
+            data.setAttribute('name', 'pstKindCd');
             data.setAttribute('value', boradPostType);
             goPost.appendChild(data);
 

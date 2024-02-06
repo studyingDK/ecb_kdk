@@ -7,9 +7,10 @@
     flex: 1;
     width: 1280px;
     margin-bottom: 1px;
-    margin-top: 60px;
+    margin-top: 61px;
 }
 
+/* 게시판 위에 사진 공간 */
 #boardDetail-container-headPhoto>img {
     max-width: 100%;
     height: 100%;
@@ -17,9 +18,49 @@
     cursor: pointer;
 }
 
-.boardDetail-container-contents {
+/* 게시판 위에 사진 없을 때 */
+.boardDetail-container-headPhoto__default {
+	max-width: 100%;
+    height: 300px;
+    background-color: #D0DDF6;
+    cursor: pointer;
+}
+
+/* 게시판 컨테이너 상단 메뉴바 */
+.boardDetail-container-menubar {
+    border: 1px solid rgb(168, 163, 163);
+    border-radius: 4px;
+    max-width: 100%;
+    height: 55px;
+    margin-top: 8px;
+    margin-bottom: 8px;
+    padding-left: 20px;
     display: flex;
     flex-direction: row;
+    align-items: center;
+}
+
+/* 게시판 컨테이너 상단 메뉴바 하위 항목*/
+.boardDetail-container-menubar * {
+    font-size: 30px;
+}
+
+/* 게시판 목록 들어갈 부분 */
+.boardDetail-container-contents {
+    display: grid;
+    grid-template-columns: 23% 77%;
+    height: 2000px;
+}
+
+/* 게시판 옆에 사이드 메뉴창 */
+.boardDetail-container-contents-nav {
+    display: flex;
+    flex-direction: column;
+}
+
+/* 게시판 옆에 사이드 메뉴창 하위 항목 */
+.boardDetail-container-contents-nav * {
+    margin-bottom: 10px;
 }
 
 /* boardDetail header end =============================================== */

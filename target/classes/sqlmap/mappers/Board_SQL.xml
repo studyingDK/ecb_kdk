@@ -4,33 +4,111 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.project.kdkhelloworld.board.mapper.BoardMapper">
 
+	<!-- 게시판 이름 (목록)조회 -->
+	<select id="selectBoardNm" parameterType="Map" resultType="PostInfoDTO">
+		select pst_kind_cd as pstKindCd, pst_kind_nm as pstKindNm from pcb_board_list
+		where 1=1
+		<if test="pstKindCd != null and searchType == 'oneSearch'">
+			and pst_kind_cd = #{pstKindCd}
+		</if>
+	</select>
+
+	<!-- (조건에 따라) 인기글 목록 조회 -->
+	<select id="selectBoardPopular" parameterType="Map" resultType="PostInfoDTO">
+		<![CDATA[
+		select 
+			@rowNum := @rowNum + 1 as rowNum
+			,pst_title_prefix_nm as pstTitlePrefixNm 
+			,pst_title as pstTitle
+			,reg_dtm as regDtm
+			,pst_views as pstViews
+			,pst_like_cnt as pstLikeCnt
+			,nickname as nickname
+			,reg_id as regId
+			,pst_id as pstId
+			,pst_kind_cd as pstKindCd
+		from 
+		  	pcb_posts, (SELECT @rowNum := 0) as t 		]]>
+		where 1=1
+			<if test="pstKindCd != null and pstKindCd != 'none'"> 
+				and pst_kind_cd = #{pstKindCd} 
+			</if>
+			<if test="pstCtdCd != null and pstCtdCd != 'none'"> 
+				and pst_kind_cd = #{pstKindCd} 
+			</if>
+			
+		<![CDATA[and reg_dtm >= CURDATE() - INTERVAL 1 WEEK AND reg_dtm <= NOW()]]>
+		
+		<![CDATA[	
+		order by pst_like_cnt desc, pst_views desc
+		]]>
+		limit 100
+	</select>
+
+
 	<!-- 게시글 insert -->
 	<insert id="insertCreatePost" parameterType="PostInfoDTO">
-		insert into pcb_posts(pst_ctg_cd, pst_no, pst_type_cd, pst_title_prefix, pst_title, pst_content, pst_comment_yn, pst_lookup_chk, pst_commnet_chk)
-		values(#{pstCtgCd}, (select pst_no+1 as pst_no from pcb_posts_no where pst_ctg_cd = #{pstCtgCd}), #{pstTypeCd}, #{pstTitlePrefix}, #{pstTitle}, #{pstContent}, #{pstCommentYn}, #{pstLookupChk}, #{pstCommnetChk})
+		insert into pcb_posts(
+				pst_kind_cd, pst_kind_nm, pst_ctg_cd, pst_ctg_nm, pst_type_cd, pst_type_nm, pst_no, 
+				pst_title_prefix_cd, pst_title_prefix_nm, pst_title, pst_content, pst_comment_yn, pst_lookup_chk, pst_commnet_chk, nickname, reg_id, lst_up_id)
+		values(	#{pstKindCd}, #{pstKindNm}, #{pstCtgCd}, #{pstCtgNm}, #{pstTypeCd}, #{pstTypeNm}, (select pst_no+1 as pst_no from pcb_posts_no where pst_kind_cd = #{pstKindCd} and pst_ctg_cd = #{pstCtgCd}),
+				#{pstTitlePrefixCd}, #{pstTitlePrefixNm}, #{pstTitle}, #{pstContent}, #{pstCommentYn}, #{pstLookupChk}, #{pstCommentChk}, #{nickname}, #{regId}, #{regId})
 	</insert>
 	
-	<!-- 해당 게시판 글 번호 +1 -->
+	<!-- 해당 게시판 카테고리 번호 +1 -->
 	<update id="updatePstNo" parameterType="PostInfoDTO">
 		update pcb_posts_no set 
-		pst_no = (select pst_no+1 as pst_no from pcb_posts_no where pst_ctg_cd = #{pstCtgCd}),
+		pst_no = (select pst_no+1 as pst_no from pcb_posts_no where pst_kind_cd = #{pstKindCd} and pst_ctg_cd = #{pstCtgCd}),
 		reg_dtm = date_format(CURRENT_TIMESTAMP,'%Y-%m-%d %H:%i:%S') 
-		where pst_ctg_cd = #{pstCtgCd}
+		where pst_kind_cd = #{pstKindCd} and pst_ctg_cd = #{pstCtgCd}
 	</update>
 	
 	<!-- 게시글 카테고리 리스트 조회 -->
-	<select id="selectPstTypeCd" parameterType="Map" resultType="PostInfoDTO">
-		select pst_type_cd as pstTypeCd
-		from pcb_pst_type_cd_list 
-		where pst_ctg_cd = #{pstCtgCd} 
+	<select id="selectPstCtgList" parameterType="Map" resultType="PostInfoDTO">
+		select pst_ctg_cd as pstCtgCd, pst_ctg_nm as pstCtgNm
+		from pcb_pst_ctg_list 
+		where pst_kind_cd = #{pstKindCd} 
 		order by pst_order
 	</select>
 	
 	<!-- 게시글 말머리 리스트 조회 -->
-	<select id="selectTitlePrefix" parameterType="Map" resultType="PostInfoDTO">
-		select pst_title_prefix as pstTitlePrefix
+	<select id="selectTitlePrefixList" parameterType="Map" resultType="PostInfoDTO">
+		select pst_title_prefix_cd as pstTitlePrefixCd, pst_title_prefix_nm as pstTitlePrefixNm
 		from pcb_pst_title_prefix_list 
-		where pst_ctg_cd = #{pstCtgCd} 
+		where pst_kind_cd = #{pstKindCd}
 		order by pst_order
 	</select>
+	
+	<!-- 게시글 조회 -->
+	<select id="selectPosts" parameterType="Map" resultType="PostInfoDTO">
+		select 
+			 pst_id as pstId
+			,pst_kind_cd as pstKindCd
+			,pst_kind_nm as pstKindNm
+			,pst_ctg_cd as pstCtgCd
+			,pst_ctg_nm as pstCtgNm
+			,pst_type_cd as pstTypeCd
+			,pst_type_nm as pstTypeNm
+			,pst_no as pstNo
+			,pst_title_prefix_cd as pstTitlePrefixCd
+			,pst_title_prefix_nm as pstTitlePrefixNm
+			,pst_title as pstTitle
+			,pst_content as pstContent
+			,pst_views as pstViews
+			,pst_like_cnt as pstLikeCnt
+			,pst_comment_yn as pstCommentYn
+			,pst_lookup_chk as pstLookupChk
+			,pst_comment_chk as pstCommentChk 
+			,nickname as nickname
+			,reg_id as regId
+			,reg_dtm as regDtm
+			,lst_up_id as lstUpId
+			,lst_up_dtm as lstUpDtm
+		from pcb_posts where 1=1
+		and pst_kind_cd = #{pstKindCd} 
+		and pst_id = #{pstId} 
+		and pst_ctg_cd = #{pstCtgCd} 
+	</select>
+	
+	
 </mapper>

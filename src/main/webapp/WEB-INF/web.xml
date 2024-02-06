@@ -33,6 +33,7 @@
 		  <param-value>classpath:logback.xml</param-value>
 	</context-param>
 	
+	<!-- Filter -->
 <!-- 	<filter>
 		<filter-name>springSecurityFilterChain</filter-name>
 		<filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
@@ -47,7 +48,17 @@
 		<param-value>/WEB-INF/spring/appServlet/security-context.xml</param-value>
 	</context-param> -->
 	
-	<!-- Filter CharacterEncoding -->
+	<!-- CORS -->
+<!-- 	<filter>
+        <filter-name>ConfigFilter</filter-name>
+        <filter-class>com.project.common.config.ConifgFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>ConfigFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping> -->
+    
+    <!-- Filter CharacterEncoding -->
 	<filter>
 		<filter-name>CharacterEncodingFilter</filter-name>
 		<filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
@@ -86,5 +97,4 @@
         <error-code>500</error-code>
         <location>/error.jsp</location>
     </error-page>
-
 </web-app>

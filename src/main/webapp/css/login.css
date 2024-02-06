@@ -1,93 +1,114 @@
-/* main ======================================================================== */
-.place_chk {
-  border: 1.2px dashed black;
+* {
+  margin: 0;
+  padding: 0;
 }
 
-* body {
-  font-family: gowunBatang;
-  font-size: 1.5rem;
-}
-
-.login-input-box {
+/* 로그인 테두리 박스 */
+.login-wrap-box {
   display: inline-block;
-  position: relative;
   text-align: center;
-  width: 32rem;
-  height: 28rem;
+  width: 650px;
+  height: 600px;
   border: 1px solid #9ea2a8;
   border-radius: 10px;
-  line-height: 0;
-  padding: 0.5rem;
+  margin-top: 50px;
 }
 
-/* loginBox 3등분 */
-.login-container {
-  position: static;
+/* 위에 여백 */
+.login-container-top {
   width: 100%;
-  height: 9rem;
+  height: 13%;
+}
+
+
+/********************************* login-box ************************************/
+
+/* flex로 영역 나눔 */
+.login-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.container__item {
+  margin-top: 20px;
 }
 
 /* 입력 시 커서 깜빡임 */
 input::placeholder {
-  font-size: 1.5rem;
+  font-size: 30px;
+  height: 80px;
   font-family: gowunBatang;
   color: #b1b5bd;
 }
 
 .container__input-box {
   width: 20rem;
-  height: 3.5rem;
+  height: 80px;
   font-family: gowunBatang;
-  font-size: 1.5rem;
+  font-size: 30px;
   border: 1px solid #d8dadd;
 }
 
+.container__two-button-area {
+  display: grid;
+  grid-template-columns: 15% 35% 35% 15%;
+  grid-template-rows: 50px;
+  align-items: center;
+  justify-items: center;
+  width: 100%;
+}
 
-/********************************* top ***************************************/
-.login-container-top {}
+.container__two-button {
+  border: 1px solid #d8dadd;
+  border-radius: 5px;
+  background-color: #0687f1;
+  color: white;
+  font-size: 30px;
+  height: 60px;
+  width: 200px;
+  cursor: pointer;
+}
 
-/*top end ===================================================================*/
-
-.login-container-center {}
-
-
-/********************************* center ************************************/
-/*center end ================================================================*/
-
+#login {
+	cursor: pointer;
+}
 
 #loginId {
   border-radius: 7px 7px 0 0;
-}
-
-#loginId:focus {
-  width: 20rem;
-  height: 3.5rem;
-  border: 1px solid #0687f1;
-  outline: #0687f1;
-  border-radius: 7px 7px 0 0;
-  caret-color: #0687f1;
-
 }
 
 #password {
   border-radius: 0 0 7px 7px;
 }
 
+#loginId:focus {
+  width: 20rem;
+  height: 80px;
+  border: 1px solid #0687f1;
+  outline: #0687f1;
+  border-radius: 7px 7px 0 0;
+  caret-color: #0687f1;
+
+}
+
 #password:focus {
   width: 20rem;
-  height: 3.5rem;
+  height: 80px;
   border: 1px solid #0687f1;
   outline: #0687f1;
   border-radius: 0 0 7px 7px;
   caret-color: #0687f1;
 }
 
-/********************************* bottom ************************************/
-.login-container-bottom {
-  position: relative;
-  width: 100%;
-  height: 100%;
+/* 아이디, 비밀번호 찾기 문구 */
+.login__lost-text {
+  font-size: 20px;
+  color: #adafb1;
+  cursor: pointer;
 }
+
+/*login-box end ================================================================*/
+
 
 img {
   width: 100%;
@@ -95,9 +116,6 @@ img {
   height: auto;
   /* 높이를 자동으로 조절하여 비율을 유지 */
 }
-
-/*bottom end ================================================================*/
-
 
 /* oauth */
 .login__radius-button {
@@ -112,11 +130,4 @@ img {
   border-radius: 10px;
   cursor: pointer;
   margin: 0 1.6rem;
-}
-
-.login__oauth-box {
-  position: absolute;
-  width: 100%;
-  text-align: center;
-  bottom: 0rem;
 }

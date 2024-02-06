@@ -4,13 +4,14 @@
   "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
 	<typeAliases>
-<!-- 		<typeAlias alias="UserInfoDTO" type="com.project.kdkhelloworld.login.dto.UserInfoDTO"/>
-		<typeAlias alias="UserInfoDetailDTO" type="com.project.kdkhelloworld.login.dto.UserInfoDetailDTO"/>
+ 		<typeAlias alias="UserInfoDTO" type="com.project.kdkhelloworld.login.dto.UserInfoDTO"/>
+<!--		<typeAlias alias="UserInfoDetailDTO" type="com.project.kdkhelloworld.login.dto.UserInfoDetailDTO"/>
 		<typeAlias alias="TotalUserInfoDTO" type="com.project.kdkhelloworld.login.dto.TotalUserInfoDTO"/> -->
 		
 <!-- 		<typeAlias alias="BoardListDTO" type="com.project.kdkhelloworld.board.dto.BoardListDTO"/> -->
 		<typeAlias alias="PostInfoDTO" type="com.project.kdkhelloworld.board.dto.PostInfoDTO"/>
 		
+		<typeAlias type="java.lang.Object" alias="Object"/>
 		<typeAlias type="java.lang.String" alias="String"/>
 		<typeAlias type="java.util.Map" alias="Map"/>
 		<typeAlias type="java.lang.Integer" alias="Integer"/>

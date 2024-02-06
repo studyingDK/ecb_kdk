@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.project.kdkhelloworld.login.mapper.LoginMapper">
+
+	<!-- 중복조회 -->
+	<select id="selectDuplicateLoginId" parameterType="Map" resultType="String">
+		select login_id from pcb_userinfo where 1=1
+		<if test="loginId != null and loginId != 'none'"> 
+			and login_id = #{loginId} 
+		</if>
+		<if test="nickname != null and nickname != 'none'"> 
+			and nickname = #{nickname} 
+		</if>
+	</select>
+	
+	<!-- 로그인 (체크용) -->
+	<select id="selectLoginCheck" parameterType="Map" resultType="UserInfoDTO">
+		select
+			 login_id as loginId
+			,password as password
+			,nickname as nickname
+			,user_login_yn as userLoginYn
+		from pcb_userinfo 
+		where login_id = #{sLoginId} AND password = #{sPassword}
+	</select>
+	
+	<!-- 로그인 (메인 화면 진입 시 유저정보) -->
+	<select id="selectLoginVO" parameterType="Map" resultType="UserInfoDTO">
+		select
+			 user_id as userId
+			,login_id as loginId
+			,password as password
+			,nickname as nickname
+			,user_photo as userPhoto
+			,user_rights as userRight
+			,user_posts_cnt as userPostsCnt
+			,user_comments_cnt as userCommentsCnt
+			,user_level as userLevel
+			,user_visit_cnt as userVisitCnt
+			,user_login_yn as userLoginYn
+			,reg_dtm as regId
+			,lst_up_id as regId
+		from pcb_userinfo 
+		where login_id = #{sLoginId} AND password = #{sPassword}
+	</select>
+	
+	<!-- 회원가입 userinfo 저장 -->
+	<insert id="insertUserinfo" parameterType="Map">
+		insert into pcb_userinfo(user_id, login_id, password, nickname, login_type) 
+		values(#{sUserId}, #{sLoginId}, #{sPassword}, #{sNickname}, #{sloginType})
+	</insert>
+	
+	<!-- 회원가입 userinfoDetail 저장 -->
+	<insert id="insertUserinfoDetail" parameterType="Map">
+		insert into pcb_userinfo_detail(user_id, user_name, user_phone, user_gender, user_country, user_birth_cd, user_zip_cd, user_address, user_address_detail, user_secondary_email) 
+		values(#{sUserId}, #{sUsername}, #{sPhoneNum}, #{sGender}, #{sCountry}, #{sUserBirth}, #{sZipCode}, #{sAddress}, #{sAddressDetail}, #{sSecondaryId})	
+	</insert>
+	
+	<!-- Oauth 회원 체크용 -->
+	<select id="selectOauthLoginCheck" parameterType="String" resultType="UserInfoDTO">
+		select
+			 user_login_yn as userLoginYn
+		from pcb_userinfo 
+		where user_id = #{sUserId}
+	</select>
+</mapper>
